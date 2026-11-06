@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "name": "Synthetic operations handbook — retrieval example",
+  "corpus": [
+    {
+      "id": "backup",
+      "title": "Database backup",
+      "text": "Create an encrypted database backup snapshot every day. Keep a copy outside the application host. A backup is useful only after a successful restore rehearsal."
+    },
+    {
+      "id": "restore",
+      "title": "Restore verification",
+      "text": "Restore the database backup into a disposable database. Run integrity checks and compare row counts before releasing the snapshot. Record the verification outcome."
+    },
+    {
+      "id": "retry",
+      "title": "Webhook retry policy",
+      "text": "Retry webhook delivery after a transient 503 response using exponential backoff. Store the attempt count and next retry time. Check for duplicate delivery before creating an order."
+    },
+    {
+      "id": "idempotency",
+      "title": "Duplicate webhook handling",
+      "text": "Store each webhook event identifier with a unique idempotency key. Ignore duplicate events before retry delivery; a replay must not create a second order."
+    },
+    {
+      "id": "staff",
+      "title": "Staff access",
+      "text": "Managers can open admin pages. Cashiers may view assigned branches. A signed staff token includes role and branch. This defines which personnel have elevated workspace access."
+    },
+    {
+      "id": "pickup",
+      "title": "Pickup windows",
+      "text": "Each food box has a pickup window at its branch. Show the start and end time before reservation. An uncollected box expires after the pickup window closes."
+    },
+    {
+      "id": "refund",
+      "title": "Refund requests",
+      "text": "A customer refund request needs an order identifier and review by a manager. This handbook describes manual refunds for card purchases only. It contains no cryptocurrency purchase or refund procedure."
+    },
+    {
+      "id": "lexical",
+      "title": "Lexical retrieval",
+      "text": "A lexical retrieval index uses exact normalized tokens. Search scores describe word overlap; they do not verify generated answers. Answer correctness requires a separate evaluation."
+    }
+  ],
+  "queries": [
+    {"id": "q-webhook", "text": "webhook retry duplicate"},
+    {"id": "q-restore", "text": "database backup restore verification"},
+    {"id": "q-staff", "text": "staff role branch"},
+    {"id": "q-pickup", "text": "food box pickup window"},
+    {"id": "q-verification", "text": "verify generated answers"},
+    {"id": "q-synonym", "text": "privileged employees"},
+    {"id": "q-bitcoin", "text": "bitcoin purchase refund procedure"},
+    {"id": "q-astronomy", "text": "orbital telescope calibration"}
+  ],
+  "qrels": {
+    "q-webhook": ["retry", "idempotency"],
+    "q-restore": ["backup", "restore"],
+    "q-staff": ["staff"],
+    "q-pickup": ["pickup"],
+    "q-verification": ["lexical"],
+    "q-synonym": ["staff"],
+    "q-bitcoin": [],
+    "q-astronomy": []
+  }
+}

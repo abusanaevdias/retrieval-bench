@@ -1,0 +1,165 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'">
+<title>Retrieval Bench — Synthetic operations handbook — retrieval example</title>
+<style>
+        :root{color-scheme:light;background:#f4f3ef;color:#172b34;font:16px/1.55 system-ui,sans-serif}
+        body{max-width:1100px;margin:0 auto;padding:40px 22px}h1{font-size:clamp(2rem,5vw,3.5rem);line-height:1.1}
+        h2{margin-top:2.5rem}h3{margin-bottom:.5rem}a{color:#005b64}code{overflow-wrap:anywhere}
+        .eyebrow{letter-spacing:.12em;font-size:.8rem;text-transform:uppercase;color:#005b64}
+        .scope,details{background:white;border:1px solid #d7dedc;border-radius:10px;padding:18px;margin:16px 0}
+        .scope{border-left:5px solid #007b83}.muted{color:#53636a;font-size:.9rem}.table-wrap{overflow:auto}
+        table{width:100%;border-collapse:collapse;background:white}th,td{text-align:left;padding:12px;border-bottom:1px solid #d7dedc}
+        th{font-size:.85rem}summary{cursor:pointer;font-weight:650}li{margin:14px 0}.badge{display:inline-block;padding:2px 8px;border-radius:5px;background:#edf2f1;font-size:.8rem}
+        .relevant{background:#d9f0e8;color:#07573e}.missed{color:#8c3d1f}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit;font-size:.9rem}
+        nav a{display:inline-block;margin-right:16px}footer{margin-top:3rem;border-top:1px solid #d7dedc;padding-top:20px}
+        @media print{body{padding:0}details{break-inside:avoid}summary{list-style:none}}
+        </style></head><body>
+<p class="eyebrow">Offline · inspectable · reproducible</p><h1>Retrieval Bench</h1>
+<p>Synthetic operations handbook — retrieval example</p>
+<p class="scope">Offline retrieval against supplied judgments; not LLM factual correctness or a model benchmark.</p>
+<p>8 documents · 8 queries · 6 answerable · 2 explicitly no-answer</p>
+<p class="muted">Dataset SHA-256: <code>865c1742b1134034736605291576fce2cc298bbb8a2f67fb4874e9dee6490426</code></p>
+<nav aria-label="Configurations">
+<a href="#config-standard">standard</a>
+<a href="#config-no-length">no-length</a>
+</nav><h2>Configuration comparison</h2>
+<p class="muted">Recall and MRR use answerable queries only. The cutoff is each configuration's top-k. No-answer false-positive rate counts no-answer queries that returned any document; lower is better. A missing denominator is shown as n/a.</p>
+<div class="table-wrap"><table><thead><tr><th>Configuration</th><th>k / k1 / b</th><th>Recall@k</th><th>MRR@k</th><th>No-answer FP rate</th></tr></thead><tbody>
+<tr><td>standard</td><td>2 / 1.2 / 0.75</td><td>0.833</td><td>0.833</td><td>0.500</td></tr>
+<tr><td>no-length</td><td>2 / 1.2 / 0.0</td><td>0.833</td><td>0.833</td><td>0.500</td></tr>
+</tbody></table></div>
+<p class="muted">no-length versus standard: Δ recall 0.000, Δ MRR 0.000, Δ no-answer FP 0.000.</p>
+<section id="config-standard"><h2>standard: per-query evidence</h2>
+<details open><summary>q-astronomy · no answer abstained</summary>
+<h3>orbital telescope calibration</h3>
+<p class="muted">Judged relevant: none (explicit no-answer)</p>
+<p>Recall@k: n/a · RR@k: n/a</p>
+<p>No documents share an indexed query token.</p>
+</details>
+<details open><summary>q-bitcoin · no answer false positive</summary>
+<h3>bitcoin purchase refund procedure</h3>
+<p class="muted">Judged relevant: none (explicit no-answer)</p>
+<p>Recall@k: n/a · RR@k: n/a</p>
+<ol>
+<li><strong>refund — Refund requests</strong> <span class="badge">not judged relevant</span><p class="muted">BM25 score: 6.12719369621 · matched tokens: procedure, purchase, refund</p><pre>A customer refund request needs an order identifier and review by a manager. This handbook describes manual refunds for card purchases only. It contains no cryptocurrency purchase or refund procedure.</pre></li>
+</ol>
+</details>
+<details open><summary>q-pickup · answerable hit</summary>
+<h3>food box pickup window</h3>
+<p class="muted">Judged relevant: pickup</p>
+<p>Recall@k: 1.000 · RR@k: 1.000</p>
+<ol>
+<li><strong>pickup — Pickup windows</strong> <span class="badge relevant">judged relevant</span><p class="muted">BM25 score: 9.45081567055 · matched tokens: box, food, pickup, window</p><pre>Each food box has a pickup window at its branch. Show the start and end time before reservation. An uncollected box expires after the pickup window closes.</pre></li>
+</ol>
+</details>
+<details open><summary>q-restore · answerable hit</summary>
+<h3>database backup restore verification</h3>
+<p class="muted">Judged relevant: backup, restore</p>
+<p>Recall@k: 1.000 · RR@k: 1.000</p>
+<ol>
+<li><strong>restore — Restore verification</strong> <span class="badge relevant">judged relevant</span><p class="muted">BM25 score: 7.52127247095 · matched tokens: backup, database, restore, verification</p><pre>Restore the database backup into a disposable database. Run integrity checks and compare row counts before releasing the snapshot. Record the verification outcome.</pre></li>
+<li><strong>backup — Database backup</strong> <span class="badge relevant">judged relevant</span><p class="muted">BM25 score: 5.11386581503 · matched tokens: backup, database, restore</p><pre>Create an encrypted database backup snapshot every day. Keep a copy outside the application host. A backup is useful only after a successful restore rehearsal.</pre></li>
+</ol>
+</details>
+<details open><summary>q-staff · answerable hit</summary>
+<h3>staff role branch</h3>
+<p class="muted">Judged relevant: staff</p>
+<p>Recall@k: 1.000 · RR@k: 1.000</p>
+<ol>
+<li><strong>staff — Staff access</strong> <span class="badge relevant">judged relevant</span><p class="muted">BM25 score: 5.54504291705 · matched tokens: branch, role, staff</p><pre>Managers can open admin pages. Cashiers may view assigned branches. A signed staff token includes role and branch. This defines which personnel have elevated workspace access.</pre></li>
+<li><strong>pickup — Pickup windows</strong> <span class="badge">not judged relevant</span><p class="muted">BM25 score: 1.26483593358 · matched tokens: branch</p><pre>Each food box has a pickup window at its branch. Show the start and end time before reservation. An uncollected box expires after the pickup window closes.</pre></li>
+</ol>
+</details>
+<details open><summary>q-synonym · answerable missed</summary>
+<h3>privileged employees</h3>
+<p class="muted">Judged relevant: staff</p>
+<p>Recall@k: 0.000 · RR@k: 0.000</p>
+<p class="missed">Missed relevant documents: staff</p>
+<p>No documents share an indexed query token.</p>
+</details>
+<details open><summary>q-verification · answerable hit</summary>
+<h3>verify generated answers</h3>
+<p class="muted">Judged relevant: lexical</p>
+<p>Recall@k: 1.000 · RR@k: 1.000</p>
+<ol>
+<li><strong>lexical — Lexical retrieval</strong> <span class="badge relevant">judged relevant</span><p class="muted">BM25 score: 5.46470078415 · matched tokens: answers, generated, verify</p><pre>A lexical retrieval index uses exact normalized tokens. Search scores describe word overlap; they do not verify generated answers. Answer correctness requires a separate evaluation.</pre></li>
+</ol>
+</details>
+<details open><summary>q-webhook · answerable hit</summary>
+<h3>webhook retry duplicate</h3>
+<p class="muted">Judged relevant: idempotency, retry</p>
+<p>Recall@k: 1.000 · RR@k: 1.000</p>
+<ol>
+<li><strong>retry — Webhook retry policy</strong> <span class="badge relevant">judged relevant</span><p class="muted">BM25 score: 4.96033991348 · matched tokens: duplicate, retry, webhook</p><pre>Retry webhook delivery after a transient 503 response using exponential backoff. Store the attempt count and next retry time. Check for duplicate delivery before creating an order.</pre></li>
+<li><strong>idempotency — Duplicate webhook handling</strong> <span class="badge relevant">judged relevant</span><p class="muted">BM25 score: 4.86489114445 · matched tokens: duplicate, retry, webhook</p><pre>Store each webhook event identifier with a unique idempotency key. Ignore duplicate events before retry delivery; a replay must not create a second order.</pre></li>
+</ol>
+</details>
+</section>
+<section id="config-no-length"><h2>no-length: per-query evidence</h2>
+<details open><summary>q-astronomy · no answer abstained</summary>
+<h3>orbital telescope calibration</h3>
+<p class="muted">Judged relevant: none (explicit no-answer)</p>
+<p>Recall@k: n/a · RR@k: n/a</p>
+<p>No documents share an indexed query token.</p>
+</details>
+<details open><summary>q-bitcoin · no answer false positive</summary>
+<h3>bitcoin purchase refund procedure</h3>
+<p class="muted">Judged relevant: none (explicit no-answer)</p>
+<p>Recall@k: n/a · RR@k: n/a</p>
+<ol>
+<li><strong>refund — Refund requests</strong> <span class="badge">not judged relevant</span><p class="muted">BM25 score: 6.39914096153 · matched tokens: procedure, purchase, refund</p><pre>A customer refund request needs an order identifier and review by a manager. This handbook describes manual refunds for card purchases only. It contains no cryptocurrency purchase or refund procedure.</pre></li>
+</ol>
+</details>
+<details open><summary>q-pickup · answerable hit</summary>
+<h3>food box pickup window</h3>
+<p class="muted">Judged relevant: pickup</p>
+<p>Recall@k: 1.000 · RR@k: 1.000</p>
+<ol>
+<li><strong>pickup — Pickup windows</strong> <span class="badge relevant">judged relevant</span><p class="muted">BM25 score: 9.53472003268 · matched tokens: box, food, pickup, window</p><pre>Each food box has a pickup window at its branch. Show the start and end time before reservation. An uncollected box expires after the pickup window closes.</pre></li>
+</ol>
+</details>
+<details open><summary>q-restore · answerable hit</summary>
+<h3>database backup restore verification</h3>
+<p class="muted">Judged relevant: backup, restore</p>
+<p>Recall@k: 1.000 · RR@k: 1.000</p>
+<ol>
+<li><strong>restore — Restore verification</strong> <span class="badge relevant">judged relevant</span><p class="muted">BM25 score: 7.26717119067 · matched tokens: backup, database, restore, verification</p><pre>Restore the database backup into a disposable database. Run integrity checks and compare row counts before releasing the snapshot. Record the verification outcome.</pre></li>
+<li><strong>backup — Database backup</strong> <span class="badge relevant">judged relevant</span><p class="muted">BM25 score: 5.05511392584 · matched tokens: backup, database, restore</p><pre>Create an encrypted database backup snapshot every day. Keep a copy outside the application host. A backup is useful only after a successful restore rehearsal.</pre></li>
+</ol>
+</details>
+<details open><summary>q-staff · answerable hit</summary>
+<h3>staff role branch</h3>
+<p class="muted">Judged relevant: staff</p>
+<p>Recall@k: 1.000 · RR@k: 1.000</p>
+<ol>
+<li><strong>staff — Staff access</strong> <span class="badge relevant">judged relevant</span><p class="muted">BM25 score: 5.53636258488 · matched tokens: branch, role, staff</p><pre>Managers can open admin pages. Cashiers may view assigned branches. A signed staff token includes role and branch. This defines which personnel have elevated workspace access.</pre></li>
+<li><strong>pickup — Pickup windows</strong> <span class="badge">not judged relevant</span><p class="muted">BM25 score: 1.28093384546 · matched tokens: branch</p><pre>Each food box has a pickup window at its branch. Show the start and end time before reservation. An uncollected box expires after the pickup window closes.</pre></li>
+</ol>
+</details>
+<details open><summary>q-synonym · answerable missed</summary>
+<h3>privileged employees</h3>
+<p class="muted">Judged relevant: staff</p>
+<p>Recall@k: 0.000 · RR@k: 0.000</p>
+<p class="missed">Missed relevant documents: staff</p>
+<p>No documents share an indexed query token.</p>
+</details>
+<details open><summary>q-verification · answerable hit</summary>
+<h3>verify generated answers</h3>
+<p class="muted">Judged relevant: lexical</p>
+<p>Recall@k: 1.000 · RR@k: 1.000</p>
+<ol>
+<li><strong>lexical — Lexical retrieval</strong> <span class="badge relevant">judged relevant</span><p class="muted">BM25 score: 5.37527840768 · matched tokens: answers, generated, verify</p><pre>A lexical retrieval index uses exact normalized tokens. Search scores describe word overlap; they do not verify generated answers. Answer correctness requires a separate evaluation.</pre></li>
+</ol>
+</details>
+<details open><summary>q-webhook · answerable hit</summary>
+<h3>webhook retry duplicate</h3>
+<p class="muted">Judged relevant: idempotency, retry</p>
+<p>Recall@k: 1.000 · RR@k: 1.000</p>
+<ol>
+<li><strong>retry — Webhook retry policy</strong> <span class="badge relevant">judged relevant</span><p class="muted">BM25 score: 5.05511392584 · matched tokens: duplicate, retry, webhook</p><pre>Retry webhook delivery after a transient 503 response using exponential backoff. Store the attempt count and next retry time. Check for duplicate delivery before creating an order.</pre></li>
+<li><strong>idempotency — Duplicate webhook handling</strong> <span class="badge relevant">judged relevant</span><p class="muted">BM25 score: 4.80350192048 · matched tokens: duplicate, retry, webhook</p><pre>Store each webhook event identifier with a unique idempotency key. Ignore duplicate events before retry delivery; a replay must not create a second order.</pre></li>
+</ol>
+</details>
+</section>
+<footer><p>BM25 lexical baseline. Scores are ranking weights, not probabilities. Judgments must be exhaustive for this evaluation's interpretation of irrelevant results and no-answer queries. No generated answers or LLM providers are involved.</p></footer></body></html>

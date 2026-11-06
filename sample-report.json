@@ -1,0 +1,560 @@
+{
+  "baseline_configuration": "standard",
+  "claim_scope": "Offline retrieval against supplied judgments; not LLM factual correctness or a model benchmark.",
+  "comparisons": [
+    {
+      "against": "standard",
+      "configuration": "no-length",
+      "macro_recall_at_k_delta": 0.0,
+      "mrr_at_k_delta": 0.0,
+      "no_answer_false_positive_rate_delta": 0.0
+    }
+  ],
+  "dataset": {
+    "answerable_query_count": 6,
+    "document_count": 8,
+    "name": "Synthetic operations handbook — retrieval example",
+    "no_answer_query_count": 2,
+    "query_count": 8,
+    "sha256": "865c1742b1134034736605291576fce2cc298bbb8a2f67fb4874e9dee6490426"
+  },
+  "method": "BM25 lexical baseline",
+  "runs": [
+    {
+      "configuration": {
+        "b": 0.75,
+        "k1": 1.2,
+        "name": "standard",
+        "top_k": 2
+      },
+      "metrics": {
+        "macro_recall_at_k": 0.8333333333333334,
+        "mrr_at_k": 0.8333333333333334,
+        "no_answer_false_positive_rate": 0.5,
+        "queries_with_hits": 6
+      },
+      "queries": [
+        {
+          "hits": [],
+          "id": "q-astronomy",
+          "metrics": {
+            "first_relevant_rank": null,
+            "missed_relevant_ids": [],
+            "recall_at_k": null,
+            "reciprocal_rank_at_k": null,
+            "relevant_retrieved": 0
+          },
+          "relevant_ids": [],
+          "status": "no_answer_abstained",
+          "text": "orbital telescope calibration"
+        },
+        {
+          "hits": [
+            {
+              "doc_id": "refund",
+              "is_relevant": false,
+              "matched_terms": [
+                "procedure",
+                "purchase",
+                "refund"
+              ],
+              "rank": 1,
+              "score": 6.12719369621,
+              "text": "A customer refund request needs an order identifier and review by a manager. This handbook describes manual refunds for card purchases only. It contains no cryptocurrency purchase or refund procedure.",
+              "title": "Refund requests"
+            }
+          ],
+          "id": "q-bitcoin",
+          "metrics": {
+            "first_relevant_rank": null,
+            "missed_relevant_ids": [],
+            "recall_at_k": null,
+            "reciprocal_rank_at_k": null,
+            "relevant_retrieved": 0
+          },
+          "relevant_ids": [],
+          "status": "no_answer_false_positive",
+          "text": "bitcoin purchase refund procedure"
+        },
+        {
+          "hits": [
+            {
+              "doc_id": "pickup",
+              "is_relevant": true,
+              "matched_terms": [
+                "box",
+                "food",
+                "pickup",
+                "window"
+              ],
+              "rank": 1,
+              "score": 9.45081567055,
+              "text": "Each food box has a pickup window at its branch. Show the start and end time before reservation. An uncollected box expires after the pickup window closes.",
+              "title": "Pickup windows"
+            }
+          ],
+          "id": "q-pickup",
+          "metrics": {
+            "first_relevant_rank": 1,
+            "missed_relevant_ids": [],
+            "recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "relevant_retrieved": 1
+          },
+          "relevant_ids": [
+            "pickup"
+          ],
+          "status": "answerable_hit",
+          "text": "food box pickup window"
+        },
+        {
+          "hits": [
+            {
+              "doc_id": "restore",
+              "is_relevant": true,
+              "matched_terms": [
+                "backup",
+                "database",
+                "restore",
+                "verification"
+              ],
+              "rank": 1,
+              "score": 7.52127247095,
+              "text": "Restore the database backup into a disposable database. Run integrity checks and compare row counts before releasing the snapshot. Record the verification outcome.",
+              "title": "Restore verification"
+            },
+            {
+              "doc_id": "backup",
+              "is_relevant": true,
+              "matched_terms": [
+                "backup",
+                "database",
+                "restore"
+              ],
+              "rank": 2,
+              "score": 5.11386581503,
+              "text": "Create an encrypted database backup snapshot every day. Keep a copy outside the application host. A backup is useful only after a successful restore rehearsal.",
+              "title": "Database backup"
+            }
+          ],
+          "id": "q-restore",
+          "metrics": {
+            "first_relevant_rank": 1,
+            "missed_relevant_ids": [],
+            "recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "relevant_retrieved": 2
+          },
+          "relevant_ids": [
+            "backup",
+            "restore"
+          ],
+          "status": "answerable_hit",
+          "text": "database backup restore verification"
+        },
+        {
+          "hits": [
+            {
+              "doc_id": "staff",
+              "is_relevant": true,
+              "matched_terms": [
+                "branch",
+                "role",
+                "staff"
+              ],
+              "rank": 1,
+              "score": 5.54504291705,
+              "text": "Managers can open admin pages. Cashiers may view assigned branches. A signed staff token includes role and branch. This defines which personnel have elevated workspace access.",
+              "title": "Staff access"
+            },
+            {
+              "doc_id": "pickup",
+              "is_relevant": false,
+              "matched_terms": [
+                "branch"
+              ],
+              "rank": 2,
+              "score": 1.26483593358,
+              "text": "Each food box has a pickup window at its branch. Show the start and end time before reservation. An uncollected box expires after the pickup window closes.",
+              "title": "Pickup windows"
+            }
+          ],
+          "id": "q-staff",
+          "metrics": {
+            "first_relevant_rank": 1,
+            "missed_relevant_ids": [],
+            "recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "relevant_retrieved": 1
+          },
+          "relevant_ids": [
+            "staff"
+          ],
+          "status": "answerable_hit",
+          "text": "staff role branch"
+        },
+        {
+          "hits": [],
+          "id": "q-synonym",
+          "metrics": {
+            "first_relevant_rank": null,
+            "missed_relevant_ids": [
+              "staff"
+            ],
+            "recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "relevant_retrieved": 0
+          },
+          "relevant_ids": [
+            "staff"
+          ],
+          "status": "answerable_missed",
+          "text": "privileged employees"
+        },
+        {
+          "hits": [
+            {
+              "doc_id": "lexical",
+              "is_relevant": true,
+              "matched_terms": [
+                "answers",
+                "generated",
+                "verify"
+              ],
+              "rank": 1,
+              "score": 5.46470078415,
+              "text": "A lexical retrieval index uses exact normalized tokens. Search scores describe word overlap; they do not verify generated answers. Answer correctness requires a separate evaluation.",
+              "title": "Lexical retrieval"
+            }
+          ],
+          "id": "q-verification",
+          "metrics": {
+            "first_relevant_rank": 1,
+            "missed_relevant_ids": [],
+            "recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "relevant_retrieved": 1
+          },
+          "relevant_ids": [
+            "lexical"
+          ],
+          "status": "answerable_hit",
+          "text": "verify generated answers"
+        },
+        {
+          "hits": [
+            {
+              "doc_id": "retry",
+              "is_relevant": true,
+              "matched_terms": [
+                "duplicate",
+                "retry",
+                "webhook"
+              ],
+              "rank": 1,
+              "score": 4.96033991348,
+              "text": "Retry webhook delivery after a transient 503 response using exponential backoff. Store the attempt count and next retry time. Check for duplicate delivery before creating an order.",
+              "title": "Webhook retry policy"
+            },
+            {
+              "doc_id": "idempotency",
+              "is_relevant": true,
+              "matched_terms": [
+                "duplicate",
+                "retry",
+                "webhook"
+              ],
+              "rank": 2,
+              "score": 4.86489114445,
+              "text": "Store each webhook event identifier with a unique idempotency key. Ignore duplicate events before retry delivery; a replay must not create a second order.",
+              "title": "Duplicate webhook handling"
+            }
+          ],
+          "id": "q-webhook",
+          "metrics": {
+            "first_relevant_rank": 1,
+            "missed_relevant_ids": [],
+            "recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "relevant_retrieved": 2
+          },
+          "relevant_ids": [
+            "idempotency",
+            "retry"
+          ],
+          "status": "answerable_hit",
+          "text": "webhook retry duplicate"
+        }
+      ]
+    },
+    {
+      "configuration": {
+        "b": 0.0,
+        "k1": 1.2,
+        "name": "no-length",
+        "top_k": 2
+      },
+      "metrics": {
+        "macro_recall_at_k": 0.8333333333333334,
+        "mrr_at_k": 0.8333333333333334,
+        "no_answer_false_positive_rate": 0.5,
+        "queries_with_hits": 6
+      },
+      "queries": [
+        {
+          "hits": [],
+          "id": "q-astronomy",
+          "metrics": {
+            "first_relevant_rank": null,
+            "missed_relevant_ids": [],
+            "recall_at_k": null,
+            "reciprocal_rank_at_k": null,
+            "relevant_retrieved": 0
+          },
+          "relevant_ids": [],
+          "status": "no_answer_abstained",
+          "text": "orbital telescope calibration"
+        },
+        {
+          "hits": [
+            {
+              "doc_id": "refund",
+              "is_relevant": false,
+              "matched_terms": [
+                "procedure",
+                "purchase",
+                "refund"
+              ],
+              "rank": 1,
+              "score": 6.39914096153,
+              "text": "A customer refund request needs an order identifier and review by a manager. This handbook describes manual refunds for card purchases only. It contains no cryptocurrency purchase or refund procedure.",
+              "title": "Refund requests"
+            }
+          ],
+          "id": "q-bitcoin",
+          "metrics": {
+            "first_relevant_rank": null,
+            "missed_relevant_ids": [],
+            "recall_at_k": null,
+            "reciprocal_rank_at_k": null,
+            "relevant_retrieved": 0
+          },
+          "relevant_ids": [],
+          "status": "no_answer_false_positive",
+          "text": "bitcoin purchase refund procedure"
+        },
+        {
+          "hits": [
+            {
+              "doc_id": "pickup",
+              "is_relevant": true,
+              "matched_terms": [
+                "box",
+                "food",
+                "pickup",
+                "window"
+              ],
+              "rank": 1,
+              "score": 9.53472003268,
+              "text": "Each food box has a pickup window at its branch. Show the start and end time before reservation. An uncollected box expires after the pickup window closes.",
+              "title": "Pickup windows"
+            }
+          ],
+          "id": "q-pickup",
+          "metrics": {
+            "first_relevant_rank": 1,
+            "missed_relevant_ids": [],
+            "recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "relevant_retrieved": 1
+          },
+          "relevant_ids": [
+            "pickup"
+          ],
+          "status": "answerable_hit",
+          "text": "food box pickup window"
+        },
+        {
+          "hits": [
+            {
+              "doc_id": "restore",
+              "is_relevant": true,
+              "matched_terms": [
+                "backup",
+                "database",
+                "restore",
+                "verification"
+              ],
+              "rank": 1,
+              "score": 7.26717119067,
+              "text": "Restore the database backup into a disposable database. Run integrity checks and compare row counts before releasing the snapshot. Record the verification outcome.",
+              "title": "Restore verification"
+            },
+            {
+              "doc_id": "backup",
+              "is_relevant": true,
+              "matched_terms": [
+                "backup",
+                "database",
+                "restore"
+              ],
+              "rank": 2,
+              "score": 5.05511392584,
+              "text": "Create an encrypted database backup snapshot every day. Keep a copy outside the application host. A backup is useful only after a successful restore rehearsal.",
+              "title": "Database backup"
+            }
+          ],
+          "id": "q-restore",
+          "metrics": {
+            "first_relevant_rank": 1,
+            "missed_relevant_ids": [],
+            "recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "relevant_retrieved": 2
+          },
+          "relevant_ids": [
+            "backup",
+            "restore"
+          ],
+          "status": "answerable_hit",
+          "text": "database backup restore verification"
+        },
+        {
+          "hits": [
+            {
+              "doc_id": "staff",
+              "is_relevant": true,
+              "matched_terms": [
+                "branch",
+                "role",
+                "staff"
+              ],
+              "rank": 1,
+              "score": 5.53636258488,
+              "text": "Managers can open admin pages. Cashiers may view assigned branches. A signed staff token includes role and branch. This defines which personnel have elevated workspace access.",
+              "title": "Staff access"
+            },
+            {
+              "doc_id": "pickup",
+              "is_relevant": false,
+              "matched_terms": [
+                "branch"
+              ],
+              "rank": 2,
+              "score": 1.28093384546,
+              "text": "Each food box has a pickup window at its branch. Show the start and end time before reservation. An uncollected box expires after the pickup window closes.",
+              "title": "Pickup windows"
+            }
+          ],
+          "id": "q-staff",
+          "metrics": {
+            "first_relevant_rank": 1,
+            "missed_relevant_ids": [],
+            "recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "relevant_retrieved": 1
+          },
+          "relevant_ids": [
+            "staff"
+          ],
+          "status": "answerable_hit",
+          "text": "staff role branch"
+        },
+        {
+          "hits": [],
+          "id": "q-synonym",
+          "metrics": {
+            "first_relevant_rank": null,
+            "missed_relevant_ids": [
+              "staff"
+            ],
+            "recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "relevant_retrieved": 0
+          },
+          "relevant_ids": [
+            "staff"
+          ],
+          "status": "answerable_missed",
+          "text": "privileged employees"
+        },
+        {
+          "hits": [
+            {
+              "doc_id": "lexical",
+              "is_relevant": true,
+              "matched_terms": [
+                "answers",
+                "generated",
+                "verify"
+              ],
+              "rank": 1,
+              "score": 5.37527840768,
+              "text": "A lexical retrieval index uses exact normalized tokens. Search scores describe word overlap; they do not verify generated answers. Answer correctness requires a separate evaluation.",
+              "title": "Lexical retrieval"
+            }
+          ],
+          "id": "q-verification",
+          "metrics": {
+            "first_relevant_rank": 1,
+            "missed_relevant_ids": [],
+            "recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "relevant_retrieved": 1
+          },
+          "relevant_ids": [
+            "lexical"
+          ],
+          "status": "answerable_hit",
+          "text": "verify generated answers"
+        },
+        {
+          "hits": [
+            {
+              "doc_id": "retry",
+              "is_relevant": true,
+              "matched_terms": [
+                "duplicate",
+                "retry",
+                "webhook"
+              ],
+              "rank": 1,
+              "score": 5.05511392584,
+              "text": "Retry webhook delivery after a transient 503 response using exponential backoff. Store the attempt count and next retry time. Check for duplicate delivery before creating an order.",
+              "title": "Webhook retry policy"
+            },
+            {
+              "doc_id": "idempotency",
+              "is_relevant": true,
+              "matched_terms": [
+                "duplicate",
+                "retry",
+                "webhook"
+              ],
+              "rank": 2,
+              "score": 4.80350192048,
+              "text": "Store each webhook event identifier with a unique idempotency key. Ignore duplicate events before retry delivery; a replay must not create a second order.",
+              "title": "Duplicate webhook handling"
+            }
+          ],
+          "id": "q-webhook",
+          "metrics": {
+            "first_relevant_rank": 1,
+            "missed_relevant_ids": [],
+            "recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "relevant_retrieved": 2
+          },
+          "relevant_ids": [
+            "idempotency",
+            "retry"
+          ],
+          "status": "answerable_hit",
+          "text": "webhook retry duplicate"
+        }
+      ]
+    }
+  ],
+  "schema_version": 1,
+  "tool": "retrieval-bench"
+}
